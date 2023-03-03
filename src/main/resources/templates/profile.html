@@ -25,9 +25,8 @@
         <th>Password</th>
       </tr>
       <tr class="user-card" th:each="user : ${users}">
-        <td th:text="${user.getEmail()}">
-        </td>
-        <td th:text="${user.getPassword()}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.password}"></td>
       </tr>
     </table>
   </div>

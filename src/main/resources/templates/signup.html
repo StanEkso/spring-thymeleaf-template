@@ -2,7 +2,6 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" type="text/css" href="../static/css/styles.css"/>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{css/styles.css}">
   <title>Title</title>
@@ -14,8 +13,7 @@
   </h2>
   <h1 class="page-title">
     Sign up
-  </h1>
-  <!--/*@thymesVar id="user" type="by.bsu.spring_thymeleaf.entity.UserEntity"*/-->
+  </h1>`
   <form class="form-wrapper" method="POST" th:object="${user}" th:action="@{/signup}">
     <label for="email">Email</label>
     <input type="email" class="form-input" id="email" placeholder="email@example.com" th:field="*{email}">
