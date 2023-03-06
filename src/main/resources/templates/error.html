@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{css/styles.css}">
+  <title>ERROR PAGE</title>
+</head>
+<body>
+<div class="page-wrapper">
+  <h2>
+    <a th:href="@{/}">To main</a>
+  </h2>
+  <h1 class="page-title">
+    An error occurred
+  </h1>
+
+  <div>
+    <div>
+      <span><strong>Status</strong></span>
+      <span th:text="${status}"></span>
+    </div>
+    <div>
+      <span><strong>Error</strong></span>
+      <span th:text="${error}"></span>
+    </div>
+    <div>
+      <span><strong>Message</strong></span>
+      <span th:text="${message}"></span>
+    </div>
+    <div th:if="${exception != null}">
+      <span><strong>Exception</strong></span>
+      <span th:text="${exception}"></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
