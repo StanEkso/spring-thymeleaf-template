@@ -1,8 +1,7 @@
 package by.bsu.spring_thymeleaf.service;
 
 import by.bsu.spring_thymeleaf.entity.UserEntity;
-import by.bsu.spring_thymeleaf.exception.UserAlreadyExistsException;
-import org.apache.catalina.User;
+import by.bsu.spring_thymeleaf.exception.UserServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,11 +11,11 @@ import java.util.Optional;
 public class UserService {
     private ArrayList<UserEntity> users = new ArrayList<>();
 
-    public ArrayList<UserEntity> getUsers() {
+    public ArrayList<UserEntity> findUsers() {
         return users;
     }
 
-    public Optional<UserEntity> getUserByEmail(String email) {
+    public Optional<UserEntity> findUserByEmail(String email) {
         return users.stream().filter((u) -> u.getEmail().equals(email)).findFirst();
     }
 
@@ -27,10 +26,10 @@ public class UserService {
                 .findFirst();
     }
 
-    public UserEntity registerUser(UserEntity user) throws UserAlreadyExistsException {
-        Optional<UserEntity> candidate = getUserByEmail(user.getEmail());
+    public UserEntity registerUser(UserEntity user) throws UserServiceException {
+        Optional<UserEntity> candidate = findUserByEmail(user.getEmail());
         if (candidate.isPresent()) {
-            throw new UserAlreadyExistsException();
+            throw new UserServiceException("User with this email is already exists!");
         }
         this.users.add(user);
 

@@ -1,7 +1,7 @@
 package by.bsu.spring_thymeleaf.controller;
 
 import by.bsu.spring_thymeleaf.entity.UserEntity;
-import by.bsu.spring_thymeleaf.exception.UserAlreadyExistsException;
+import by.bsu.spring_thymeleaf.exception.UserServiceException;
 import by.bsu.spring_thymeleaf.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -17,11 +17,11 @@ import java.util.Optional;
 
 @RequestMapping
 @Controller
-public class MainController {
-    private UserService userService;
-    private static Logger logger = LogManager.getLogger(MainController.class);
+public class UserController {
+    private final UserService userService;
+    private static final Logger logger = LogManager.getLogger(UserController.class);
 
-    public MainController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -42,7 +42,7 @@ public class MainController {
     public String postUserEntity(@ModelAttribute("user") UserEntity user, Model model) {
         try {
             userService.registerUser(user);
-        } catch (UserAlreadyExistsException e) {
+        } catch (UserServiceException e) {
             throw new RuntimeException(e);
         }
         return "redirect:/profile";
@@ -66,7 +66,7 @@ public class MainController {
 
     @GetMapping("/profile")
     public String getProfile(Model model) {
-        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("users", userService.findUsers());
         return "profile";
     }
 }
