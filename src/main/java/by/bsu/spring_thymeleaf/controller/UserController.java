@@ -57,11 +57,12 @@ public class UserController {
 
     @PostMapping("/signin")
     public String loginWithData(@ModelAttribute("user") UserEntity user, Model model) {
-        Optional<UserEntity> candidate = userService.logIn(user.getEmail(), user.getPassword());
-        if (candidate.isEmpty()) {
+        try {
+            userService.logIn(user.getEmail(), user.getPassword());
+            return "redirect:/profile";
+        } catch (UserServiceException e) {
             return "redirect:/signin";
         }
-        return "redirect:/profile";
     }
 
     @GetMapping("/profile")

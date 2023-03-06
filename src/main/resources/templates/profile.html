@@ -20,11 +20,12 @@
     </p>
     <table class="users-list">
       <tr>
-        <th>Email
-        </th>
+        <th>ID</th>
+        <th>Email</th>
         <th>Password</th>
       </tr>
-      <tr class="user-card" th:each="user : ${users}">
+      <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.password}"></td>
       </tr>

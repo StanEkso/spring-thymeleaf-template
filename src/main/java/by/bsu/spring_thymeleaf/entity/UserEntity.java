@@ -1,6 +1,14 @@
 package by.bsu.spring_thymeleaf.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity(name = "Users")
 public class UserEntity {
+    @Id
+    @GeneratedValue
+    private Long id;
     private String email;
     private String password;
 
@@ -35,6 +43,15 @@ public class UserEntity {
         return "UserEntity{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", id=" + id +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
